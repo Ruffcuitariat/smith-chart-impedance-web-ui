@@ -1,0 +1,131 @@
+:root {
+  --paper: #f4f1ea;
+  --ink: #17201d;
+  --muted: #69716d;
+  --line: #d6d3ca;
+  --panel: #fbfaf6;
+  --accent: #0d6859;
+  --accent-soft: #dce9e4;
+  --signal: #cf4b3f;
+  --shadow: 0 18px 50px rgba(27, 37, 33, 0.08);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 85% 8%, rgba(13, 104, 89, 0.09), transparent 28rem),
+    linear-gradient(180deg, #f7f4ed 0%, var(--paper) 100%);
+  font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 42px 30px;
+}
+
+h1, h2, p { margin: 0; }
+h1 { margin-top: 5px; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(32px, 4vw, 54px); font-weight: 500; letter-spacing: -0.04em; }
+h2 { margin-top: 4px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+.eyebrow, .step { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.15em; }
+.subtitle { margin-top: 10px; color: var(--muted); }
+.formula { display: flex; gap: 22px; padding-bottom: 7px; color: var(--muted); font-family: Georgia, serif; white-space: nowrap; }
+
+main {
+  display: grid;
+  grid-template-columns: minmax(310px, 390px) minmax(540px, 1fr);
+  gap: 22px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 42px 28px;
+}
+
+.control-panel, .chart-panel {
+  background: rgba(251, 250, 246, 0.91);
+  border: 1px solid rgba(214, 211, 202, 0.9);
+  box-shadow: var(--shadow);
+}
+
+.control-panel { padding: 28px; }
+.chart-panel { padding: 28px 30px 20px; }
+.section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.privacy-badge { padding: 6px 10px; color: var(--accent); background: var(--accent-soft); border-radius: 999px; font-size: 12px; white-space: nowrap; }
+
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 168px;
+  margin-top: 25px;
+  border: 1.5px dashed #9ba8a3;
+  background: rgba(220, 233, 228, 0.28);
+  cursor: pointer;
+  transition: 160ms ease;
+}
+.drop-zone:hover, .drop-zone.is-dragging { border-color: var(--accent); background: rgba(220, 233, 228, 0.62); transform: translateY(-1px); }
+.drop-zone input { display: none; }
+.drop-zone strong { margin: 10px 0 5px; font-size: 15px; }
+.drop-zone span:last-child { color: var(--muted); font-size: 12px; }
+.upload-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--accent); border-radius: 50%; color: var(--accent); font-size: 23px; }
+
+.status { margin-top: 14px; min-height: 38px; padding: 10px 12px; color: var(--muted); background: #f0eee8; font-size: 13px; line-height: 1.4; }
+.status.error { color: #a33d34; background: #f7e5e1; }
+.status.success { color: #185d51; background: #e2efe9; }
+
+.settings { display: grid; gap: 13px; margin-top: 22px; }
+.settings label { display: grid; gap: 7px; color: var(--muted); font-size: 12px; }
+select, input[type="number"] { width: 100%; padding: 10px 34px 10px 11px; border: 1px solid var(--line); color: var(--ink); background: var(--panel); font: inherit; }
+
+.summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 22px; background: var(--line); border: 1px solid var(--line); }
+.summary div { padding: 13px 9px; background: var(--panel); }
+.summary span { display: block; color: var(--muted); font-size: 11px; }
+.summary strong { display: block; margin-top: 5px; font-size: 14px; font-weight: 600; }
+
+.export-block { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+.button-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 12px; }
+button { min-height: 42px; padding: 9px 12px; border: 1px solid var(--ink); color: var(--panel); background: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+button:nth-child(n+3) { color: var(--ink); background: transparent; }
+button:disabled { opacity: 0.35; cursor: not-allowed; }
+button:not(:disabled):hover { transform: translateY(-1px); }
+
+.chart-heading { align-items: center; }
+.legend { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; }
+.legend span:first-child { width: 54px; height: 5px; background: linear-gradient(90deg, #153d68, #14847a, #f0c657); }
+.chart-wrap { position: relative; min-height: 610px; margin-top: 12px; }
+#smith-chart { display: block; width: 100%; height: 610px; overflow: visible; }
+.empty-state { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 9px; color: var(--muted); text-align: center; pointer-events: none; }
+.empty-state strong { color: var(--ink); font-size: 16px; }
+.empty-state span:last-child { font-size: 13px; }
+.empty-orbit { width: 84px; height: 84px; border: 1px solid #abb2ae; border-radius: 50%; box-shadow: inset 0 0 0 22px var(--panel), inset 0 0 0 23px #c5c9c6; }
+.tooltip { position: absolute; z-index: 5; padding: 8px 10px; color: #fff; background: rgba(23, 32, 29, 0.94); font-size: 12px; line-height: 1.45; pointer-events: none; transform: translate(12px, -50%); white-space: nowrap; }
+.chart-footer { display: flex; justify-content: space-between; gap: 20px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+footer { max-width: 1440px; margin: 0 auto; padding: 0 42px 36px; color: var(--muted); font-size: 12px; }
+
+@media (max-width: 980px) {
+  .topbar { align-items: flex-start; padding: 34px 22px 23px; }
+  .formula { display: none; }
+  main { grid-template-columns: 1fr; padding: 0 22px 24px; }
+  .chart-panel { grid-row: 1; }
+  .chart-wrap, #smith-chart { min-height: 510px; height: 510px; }
+  footer { padding: 0 22px 30px; }
+}
+
+@media (max-width: 560px) {
+  .topbar { padding-inline: 16px; }
+  main { padding-inline: 16px; }
+  .control-panel, .chart-panel { padding: 20px; }
+  .chart-wrap, #smith-chart { min-height: 390px; height: 390px; }
+  .chart-footer { flex-direction: column; gap: 6px; }
+  .summary { grid-template-columns: 1fr; }
+  footer { padding-inline: 16px; }
+}
